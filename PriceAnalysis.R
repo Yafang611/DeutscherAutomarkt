@@ -3,8 +3,7 @@ setwd("C:/Users/vicky/OneDrive/桌面/Coding and Data Literacy/Kaggle/GermanyCar
 data0 <- read.csv("autoscout24-germany-dataset.csv", header = TRUE, sep = ",")
 plot(density(data0$price))
 
-manufacturer <- levels(as.factor(data0$make)) # before obtaining the components of factor, converting into a factor is necessary
-
+manufacturer <- levels(as.factor(data0$make)) 
 sum(is.na(data0))
 apply(is.na(data0), 2, which) # to locate the .na position
 
@@ -44,7 +43,6 @@ barplot(df_offerType[order(df_offerType, decreasing = FALSE)], col="#69b3a2", ho
 
 # Then found that used cars number is the most. ->analysis on used car could be more accurate? more data.
 
-
 library(corrplot)
 data4 <- data2 %>%
   dummy_cols(select_columns = c("fuel", "gear")) %>%# dummy fuel and gear without considering make and model
@@ -61,7 +59,6 @@ colnames(data4)[9] <- "fuel_Fuel" # rename the column because / is not be recogn
 colnames(data4)[13] <- "fuel_Electric_Diesel"
 colnames(data4)[14] <- "fuel_Electric_Gasoline"
 colnames(data4)[23] <- "gear_SemiAutomatic"
-
 
 View(data4)
 
