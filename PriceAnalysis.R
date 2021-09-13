@@ -92,3 +92,5 @@ varImpPlot(rf, main ='Feature importance')
 test$price_rf <- predict(rf, newdata = test)
 test$price_error_rf <- (test$price_rf - test$price)^2
 mse_rf <- mean(test$price_error_rf)
+
+mse_rf # the result is 0????
