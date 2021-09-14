@@ -8,6 +8,6 @@ DecisionTree_Models.R: Decision Tree, including w/ cv & w/o cv, hyperparameter (
 Bagged_RandomForest_Models.R Bagged trees including w/ cv & w/o cv, , Random Forest (date: 2021-09-15)
 Boosted Trees: ......(ongoing) 
 
-Comparison summary of mae, rmse by using above methods could be find in the Image file.
+Comparison summary of mae, rmse by using above methods could be find in the 'Results_Summary' file.
 
 Happy life, data drive!
