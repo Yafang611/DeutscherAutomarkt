@@ -1,9 +1,10 @@
-lm(list = ls())
+rm(list = ls())
 setwd("C:/Users/vicky/OneDrive/桌面/Coding and Data Literacy/Kaggle/GermanyCar")
 data0 <- read.csv("autoscout24-germany-dataset.csv", header = TRUE, sep = ",")
 plot(density(data0$price))
 
-manufacturer <- levels(as.factor(data0$make)) 
+manufacturer <- levels(as.factor(data0$make)) # before obtaining the components of factor, converting into a factor is necessary
+
 sum(is.na(data0))
 apply(is.na(data0), 2, which) # to locate the .na position
 
@@ -18,7 +19,6 @@ library(fastDummies)
 data2 <- data1 %>%
   dummy_cols(select_columns = "offerType")
 
-View(data2)
 df_offerType_all <- nrow(data2)
 
 # create function for the next step of checking rows of value == 1 
@@ -37,11 +37,12 @@ names(df_offerType)[6] <- c("offerType_all")
 
 # cbind(df_offerType, df_offerType_all) - to add a column in a df rather than a element in a vector
 
-# Virsualize the data # for each offerType
-par(mar=c(5, 12, 2, 2)) # 对画布上下左右位置移动。数字代表移动的距离。
+# Visualize the data # for each offerType
+par(mar=c(5, 12, 2, 2)) # adjust the canvas
 barplot(df_offerType[order(df_offerType, decreasing = FALSE)], col="#69b3a2", horiz=T, las = 1, cex.names = 1)
 
 # Then found that used cars number is the most. ->analysis on used car could be more accurate? more data.
+
 
 library(corrplot)
 data4 <- data2 %>%
@@ -59,8 +60,6 @@ colnames(data4)[9] <- "fuel_Fuel" # rename the column because / is not be recogn
 colnames(data4)[13] <- "fuel_Electric_Diesel"
 colnames(data4)[14] <- "fuel_Electric_Gasoline"
 colnames(data4)[23] <- "gear_SemiAutomatic"
-
-View(data4)
 
 vars1 <- colnames(data4)
 vars2 <- vars1[!vars1 %in% c("price")]
@@ -89,5 +88,4 @@ varImpPlot(rf, main ='Feature importance')
 test$price_rf <- predict(rf, newdata = test)
 test$price_error_rf <- (test$price_rf - test$price)^2
 mse_rf <- mean(test$price_error_rf)
-
-mse_rf # the result is 0????
+mse_rf
